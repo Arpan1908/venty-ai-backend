@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -8,11 +7,12 @@ const app = express();
 const port = 5000;
 
 // Middleware
-app.use(cors({
-  origin: 'https://your-frontend-url.com', // Set the frontend URL
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// app.use(cors({
+//   origin: '', // Set the frontend URL
+//   methods: ['GET', 'POST'],
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }));
+app.use(cors());
 app.use(express.json());
 
 // Initialize Gemini model
@@ -20,7 +20,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
 // Define the /chat route
-app.post('/api/chat', async (req, res) => {
+app.post('/', async (req, res) => {
   const { message } = req.body;
 
   // Predefined prompt to act as a therapist
